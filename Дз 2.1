@@ -1,0 +1,26 @@
+Дз 2.1.cs
+﻿using System;
+namespace homework_two_one
+{
+
+    class Program
+    {
+        static void Main()
+        {
+            Console.Write("Введите первую строку: ");
+            string s = Console.ReadLine();
+            Console.Write("Введите вторую строку: ");
+            string s1 = Console.ReadLine();
+
+            int count = 0;
+            int index = s.IndexOf(s1);
+
+            while (index != -1)
+            {
+                count++;
+                index = s.IndexOf(s1, index+1);
+            }
+            Console.WriteLine("Количество вхождений: " + count);
+        }
+    }
+}
