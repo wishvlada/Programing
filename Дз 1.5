@@ -1,0 +1,50 @@
+Дз 1.1.cs
+﻿using System;
+namespace homework_one_five
+{
+
+    class Program
+    {
+        static void Main()
+        {
+            Console.Write("Введите ab сторону первого треугольника: ");
+            int ab = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Введите bc сторону первого треугольника: ");
+            int bc = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Введите ca сторону первого треугольника: ");
+            int ca = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Введите a1b1 сторону второго треугольника: ");
+            int a1b1 = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Введите b1c1 сторону второго треугольника: ");
+            int b1c1 = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Введите c1a1 сторону второго треугольника: ");
+            int c1a1 = Convert.ToInt32(Console.ReadLine());
+
+            if ((ab + bc) < ca || (ab + ca) < bc || (ca + bc) < ab)
+            {
+                Console.WriteLine("Нет такого треугольника!");
+            }
+            else if ((a1b1 + b1c1) < c1a1 || (a1b1 + c1a1) < b1c1 || (c1a1 + b1c1) < a1b1)
+            {
+                Console.WriteLine("Нет такого треугольника!");
+            }
+            else
+            {
+                if ((ab/a1b1) == (bc/b1c1) && (bc / b1c1) == (ca/c1a1) && (ab / a1b1) == (ca / c1a1))
+                {
+                    Console.WriteLine("Да");
+                }
+                else
+                {
+                    Console.WriteLine("Нет");
+                }
+            }
+            
+        }
+    }
+}
