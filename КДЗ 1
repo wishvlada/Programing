@@ -1,0 +1,173 @@
+namespace KDZ1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Правила:");
+            Console.WriteLine("Каждый из игроков задумывает и записывает тайное 4-значное число с неповторяющимися цифрами. Игрок, который начинает игру по жребию, делает первую попытку отгадать число. Попытка — это 4-значное число с неповторяющимися цифрами, сообщаемое противнику. Противник сообщает в ответ, сколько цифр угадано без совпадения с их позициями в тайном числе (то есть количество коров) и сколько угадано вплоть до позиции в тайном числе (то есть количество быков).");
+            Console.WriteLine("");
+            Console.WriteLine("Если хотите посмотреть, какое число загадал противник, введите (Показать загаданное число). В этом случае игра завершится.");
+            Console.WriteLine("");
+            Console.Write("Игрок А, введите свое четырехзначное число: ");
+            string a = "";
+            while (true)
+            {
+                                                                                                    
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Enter)
+                    break;
+                a += key.KeyChar;
+            }
+            Console.WriteLine("****");
+                                                                                                    //игроки загадывают числа + цикл while, чтобы в консоли не показывалось, кто что загадал
+            Console.Write("Игрок B, введите свое четырехначное число: ");
+            string b = "";
+            while (true)
+            {
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Enter)
+                    break;
+                b += key.KeyChar;
+            }
+            Console.WriteLine("****");
+
+            if (OnlyOnceCheck(a) == true && a.Length == 4)
+            {
+                if (OnlyOnceCheck(b) == true && b.Length == 4)
+                {
+                    for (int i = 1; i < 100000000; i++)                                             // количесво попыток
+                    {
+                        Console.Write($"Игрок А, попытка {i}: ");
+                        string num1 = Console.ReadLine();
+                        if (num1 == "Показать загаданное число")                                    //возможность сдаться и показать ответ
+                        {
+                            Console.WriteLine($"Игрок А загадал " + a);
+                            Console.WriteLine($"Игрок В загадал " + b);
+                            break;
+                        }
+                        if (OnlyOnceCheck(num1) == true && num1.Length == 4)
+                        {
+                            Console.Write($"Игрок B, попытка {i}: ");
+                            string num2 = Console.ReadLine();
+                            if (num2 == "Показать загаданное число")
+                            {
+                                Console.WriteLine($"Игрок А загадал " + a);
+                                Console.WriteLine($"Игрок В загадал " + b);
+                                break;
+                            }
+                            if (OnlyOnceCheck(num2) == true && num2.Length == 4)
+                            {
+                                if (IsVin(a, b, num1, num2) == 1)                                   //проверка на победу
+                                {
+                                    Console.WriteLine("Победил игрок B");
+                                    Console.WriteLine($"Игрок A загадал: {a}");
+                                    Console.WriteLine($"Игрок B загадал: {b}");
+                                    break;
+
+                                }
+                                if (IsVin(a, b, num1, num2) == 2)
+                                {
+                                    Console.WriteLine("Победил игрок A");
+                                    Console.WriteLine($"Игрок A загадал: {a}");
+                                    Console.WriteLine($"Игрок B загадал: {b}");
+                                    break;
+                                }
+                                else
+                                {   CowA(b, num1);
+                                    BullA(b, num1);
+                                    CowB(a, num2);
+                                    BullB(a, num2);
+                                }
+                            }
+                            else Console.WriteLine("Число должно быть четырехзначным, с неповторяющимися цифрами");
+                        }
+                        else Console.WriteLine("Число должно быть четырехзначным, с неповторяющимися цифрами");
+                    }
+                }
+                else Console.WriteLine("Число должно быть четырехзначным, с неповторяющимися цифрами");
+            }
+            else Console.WriteLine("Число должно быть четырехзначным, с неповторяющимися цифрами");
+        }
+        static public int IsVin(string A, string B, string Num1, string Num2)
+        {
+            if (Num2 == A)
+                return 1;
+            if (Num1 == B)                                                                        //проверка на победу
+                return 2;
+            else
+                return 0;
+        }
+
+        static void CowB(string A, string Num2)                                                   //подсчет коров игрока В
+        {
+            int cow = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                cow = 0;
+                for (int j = 0; j < Num2.Length; j++)
+                {
+                    string s = A.ToString();
+                    string s1 = Num2[j].ToString();
+                    int index = s.IndexOf(s1);
+                    while (index != -1)
+                    {
+                        cow++;
+                        index = s.IndexOf(s1, index + 1);
+                    }
+                }
+                break;
+            }
+            Console.WriteLine($"Игрок B: Коровы - {cow}");
+        }
+        static void CowA(string B, string Num1)                                                    //подсчет коров игрока А
+        {
+            int cow = 0;
+            for (int i = 0; i < B.Length; i++)
+            {
+                cow = 0;
+                for (int j = 0; j < Num1.Length; j++)
+                {
+                    string s = B.ToString();
+                    string s1 = Num1[j].ToString();
+                    int index = s.IndexOf(s1);
+                    while (index != -1)
+                    {
+                        cow++;
+                        index = s.IndexOf(s1, index + 1);
+                    }
+                }
+                break;
+            }
+            Console.WriteLine($"Игрок A: Коровы - {cow}");
+        }
+        public static bool OnlyOnceCheck(string input)                                              // проверка, что в числе цифры не повторяются
+        {
+            return input.Distinct().Count() == input.Length;
+        }
+
+        static void BullB(string A, string Num2)                                                    // подсчет быков игрока В
+        {
+            bool flag = true;
+            int bull = 0;
+            for (int i = 0; i < 4; i++)
+            { if (A[i] != Num2[i]) { flag = false; }
+                else { flag = true; }
+                if (flag == true) { bull++; } }
+            Console.WriteLine("         Быки - " + bull);
+        }
+        static void BullA(string B, string Num1)                                                    // подсчет быков игрока А
+        {
+            bool flag = true;
+            int bull = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                if (B[i] != Num1[i]) { flag = false; }
+                else { flag = true; }
+                if (flag == true) { bull++; }
+            }
+            Console.WriteLine("         Быки - " + bull);
+        }
+    }
+}
+
