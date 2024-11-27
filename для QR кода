@@ -1,0 +1,18 @@
+int[] g = { 37, 95, 154, 46, 100, 24, 254, 129, 169, 189, 210, 250, 65, 228, 152, 130, 32 };
+int b = Convert.ToInt32(Console.ReadLine()); Console.WriteLine(b);
+for (int i = 0; i < g.Length; i++)
+{ int v = g[i] + b;
+    if (v <= 254)
+    {Console.Write(v + ", "); }
+    else {int n = v % 255; Console.Write(n + ", "); }
+
+}
+Console.WriteLine(" ");
+int[] c = { 46, 39, 86, 46, 136, 9, 18, 129, 169, 189, 210, 250, 65, 228, 152, 130, 32 };
+int[] m = { 11, 120, 204, 0, 236, 17, 236, 00, 00, 00, 00, 0, 00, 00, 00, 00, 00 };
+for (int i = 0; i < c.Length; i++)
+{
+    int v = c[i] ^ m[i];
+    Console.Write(v + ", ");
+
+}
