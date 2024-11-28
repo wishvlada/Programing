@@ -11,42 +11,53 @@ namespace homework_one_two
             int b = Convert.ToInt32(Console.ReadLine());
             Console.Write("Введите коэффициент c: ");
             int c = Convert.ToInt32(Console.ReadLine());
-            if (a == 0)
+
+            if (a == 0 && b == 0 && c == 0)
             {
-                    int count = 1;
-                    c = c * (-1);
-                    Console.WriteLine(c);
-                    double root = c / b;
-                    Console.WriteLine($"Количество решений: {count}");
-                    Console.WriteLine(root);
+                Console.WriteLine("Бесконечное множество решений");
             }
-            else
+            
+            if (a == 0 && b == 0 && c!=0)
             {
-                    int count = 0;
-                    double d = 0.0f;
-                    d = b * b - 4 * a * c;
-                    double root1 = 0;
-                    double root2 = 0;
-                    if (d == 0)
-                    {
-                        count = 1;
-                        root1 = (-b) / 2 * a;
-                        Console.WriteLine($"Количество решений: {count}");
-                        Console.WriteLine(root1);
-                    }
-                    if (d > 0)
-                    {
-                        count = 2;
-                        root1 = (-b + Math.Sqrt(d)) / (2 * a);
-                        root2 = (-b - Math.Sqrt(d)) / (2 * a);
-                        Console.WriteLine($"Количество решений: {count}");
-                        Console.WriteLine(root1);
-                        Console.WriteLine(root2);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Нет вещественных корней");
-                    }
+                Console.WriteLine("Решений нет");
+            }
+            
+            if (a == 0 && b!=0)
+            {
+                int count = 1;
+                c = c * (-1);
+                double root = c / b;
+                Console.WriteLine($"Количество решений: {count}");
+                Console.WriteLine(root);
+            }
+            
+            if (a != 0)
+            {
+                int count = 0;
+                double d = 0.0f;
+                d = b * b - 4 * a * c;
+                double root1 = 0;
+                double root2 = 0;
+                if (d == 0)
+                {
+                    count = 1;
+                    root1 = (-b) / 2 * a;
+                    Console.WriteLine($"Количество решений: {count}");
+                    Console.WriteLine(root1);
+                }
+                if (d > 0)
+                {
+                    count = 2;
+                    root1 = (-b + Math.Sqrt(d)) / (2 * a);
+                    root2 = (-b - Math.Sqrt(d)) / (2 * a);
+                    Console.WriteLine($"Количество решений: {count}");
+                    Console.WriteLine(root1);
+                    Console.WriteLine(root2);
+                }
+                if (d < 0)
+                {
+                    Console.WriteLine("Нет вещественных корней");
+                }
             }
         }
     }
