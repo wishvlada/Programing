@@ -5,22 +5,22 @@ namespace homework_one_five
     {
         static void Main()
         {
-            Console.Write("Введите ab сторону первого треугольника: ");
+            Console.Write("Введите AB сторону первого треугольника: ");
             double ab = Convert.ToDouble(Console.ReadLine());
 
-            Console.Write("Введите bc сторону первого треугольника: ");
+            Console.Write("Введите BA сторону первого треугольника: ");
             double bc = Convert.ToDouble(Console.ReadLine());
 
-            Console.Write("Введите ca сторону первого треугольника: ");
+            Console.Write("Введите CA сторону первого треугольника: ");
             double ca = Convert.ToDouble(Console.ReadLine());
 
-            Console.Write("Введите a1b1 сторону второго треугольника: ");
+            Console.Write("Введите A1B1 сторону второго треугольника: ");
             double a1b1 = Convert.ToDouble(Console.ReadLine());
 
-            Console.Write("Введите b1c1 сторону второго треугольника: ");
+            Console.Write("Введите B1C1 сторону второго треугольника: ");
             double b1c1 = Convert.ToDouble(Console.ReadLine());
 
-            Console.Write("Введите c1a1 сторону второго треугольника: ");
+            Console.Write("Введите C1A1 сторону второго треугольника: ");
             double c1a1 = Convert.ToDouble(Console.ReadLine());
 
             if ((ab + bc) < ca || (ab + ca) < bc || (ca + bc) < ab)
@@ -33,6 +33,21 @@ namespace homework_one_five
             }
             else
             {
+                double m;
+                while (ab < bc || bc < ca)
+                {
+                    if (ab < bc) { m = ab; ab = bc; bc = m; }
+                    if (ab < ca) { m = ab; ab = ca; ca = m; }
+                    if (bc < ca) { m = bc; bc = ca; ca = m; }
+                }
+
+                while (a1b1 < b1c1 || b1c1 < c1a1)
+                {
+                    if (a1b1 < b1c1) { m = a1b1; a1b1 = b1c1; b1c1 = m; }
+                    if (a1b1 < c1a1) { m = a1b1; a1b1 = c1a1; c1a1 = m; }
+                    if (b1c1 < c1a1) { m = b1c1; b1c1 = c1a1; c1a1 = m; }
+                }
+
                 if ((ab/a1b1) == (bc/b1c1) && (bc / b1c1) == (ca/c1a1) && (ab / a1b1) == (ca / c1a1))
                 {
                     Console.WriteLine("Да");
@@ -42,7 +57,7 @@ namespace homework_one_five
                     Console.WriteLine("Нет");
                 }
             }
-            
         }
     }
 }
+
