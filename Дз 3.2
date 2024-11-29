@@ -7,47 +7,88 @@ namespace homework_three_two
     {
         static void Main()
         {
-            Console.WriteLine("Введите количество строк: ");
-            int a = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Введите количество столбцов: ");
-            int b = Convert.ToInt32(Console.ReadLine());
             string print = "";
-            for (int i = 1; i <= a; i++)
+            for (int i = 0; i <= 11; i++)
             {
-                if (i == 1)
+                if (i == 1 || i == 11)
                 {
-                    print = "  ";
-                    for (int j = 0; j < b; j++)
+                    for (int j = 0; j <= 11; j++)
                     {
-                        print = "*" + print;
+                        if (j == 1 || j == 2 || j == 3)
+                        {
+                            print += " ";
+                        }
+
+                        else if (j == 4 || j == 5 || j == 6 || j == 7 || j == 8)
+                        {
+                            print += "*";
+                        }
+
+                        else
+                        {
+                            print += " ";
+                        }
+                    }
+                Console.WriteLine(print);
+                }
+                print = "";
+                if (i == 2 || i == 10)
+                {
+                    for (int j = 0; j <= 11; j++)
+                    {
+                        if (j == 1 || j == 2)
+                        {
+                            print += " ";
+                        }
+                        else if (j == 3 || j == 9)
+                        {
+                            print += "*";
+                        }
+                        else
+                        {
+                        print += " ";
+                        }
                     }
                     Console.WriteLine(print);
-                    print = "";
                 }
-                if (i == a)
+                print = "";
+                if (i == 3 || i == 9)
                 {
-                    print = "  ";
-                    for (int j = 0; j < b; j++)
+                    for (int j = 0; j <= 11; j++)
                     {
-                        print = "*" + print;
+                        if (j == 1)
+                        {
+                            print += " ";
+                        }
+                        else if (j == 2 || j == 10)
+                        {
+                            print += "*";
+                        }
+                        else
+                        {
+                            print += " ";
+                        }
                     }
                     Console.WriteLine(print);
-                    print = "";
                 }
-                else
+                print = "";
+                if (i == 4 || i == 5 || i == 6 || i == 7 || i == 8)
                 {
-                    print = "*";
-                    for (int j = 0; j < b-1; j++)
+                    for (int j = 0; j <= 11; j++)
                     {
-                        print = print + " ";
+                        if (j == 1 || j == 11)
+                        {
+                            print += "*";
+                        }
+                        else
+                        {
+                            print += " ";
+                        }
                     }
-                    print = print + "*";
                     Console.WriteLine(print);
-                    print = "";
                 }
+                print = "";
             }
-
         }
-
     }
 }
